@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+
+    <title>Customer Contact</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css"  th:href="@{/assets/css/main.css}" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css"  th:href="@{/assets/css/noscript.css}"  /></noscript>
+</head>
+
+<body class="is-preload">
+
+<div id="page-wrapper">
+
+    <!-- Header -->
+    <header id="header">
+        <h1><a href="/welcome">XCentrica</a></h1>
+        <nav>
+            <a href="#menu">Menu</a>
+        </nav>
+    </header>
+
+    <!-- Menu -->
+    <nav id="menu">
+        <div class="inner">
+            <h2>Menu</h2>
+            <ul class="links">
+                <li><a href="/welcome">Home</a></li>
+                <li><a href="/contact/myCases">My Cases</a></li>
+            </ul>
+            <a href="#" class="close">Close</a>
+        </div>
+    </nav>
+
+    <!-- Banner -->
+    <section id="banner">
+        <div class="inner">
+            <div class="logo"><span class="icon solid fa-home"></span></div>
+            <h2>Create a new case</h2>
+            <p>Contact our customer service support for any issues or questions</p>
+        </div>
+    </section>
+
+    <!-- Wrapper -->
+    <section id="wrapper">
+        <!-- Content -->
+        <div class="wrapper">
+            <div class="inner">
+                <section>
+                    <form th:object="${aopCase}" th:action="@{/contact/newCase}" method="post">
+                        <input type="hidden" th:field="*{caseUser}" />
+                        <div class="row gtr-uniform">
+                            <div class="col-12">
+                                <label>Subject</label>
+                                <input type="text" class="form-control" th:field="*{subject}"/>
+                                <p th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}">Subject error</p>
+                            </div>
+                            <div class="col-4 col-12-xsmall">
+                                <label>Priority</label>
+                                <select class="form-control" id="casePriority" name="casePriority" th:field="*{priority}" >
+                                    <option value="4">Low</option>
+                                    <option value="3">Medium</option>
+                                    <option value="2">High</option>
+                                </select>
+                            </div>
+                            <div class="col-4 col-12-xsmall">
+                                <label>Type</label>
+                                <select class="form-control" id="caseType" name="caseType" th:field="*{type}" >
+                                    <option value="feedback">Feedback</option>
+                                    <option value="question">Question</option>
+                                    <option value="issue">Issue</option>
+                                </select>
+                            </div>
+                            <div class="col-4 col-12-xsmall">
+                                <label>Category</label>
+                                <select class="form-control" id="caseCategory" name="caseCategory" th:field="*{category}" >
+                                    <option value="serviceX">Service X</option>
+                                    <option value="serviceY">Service Y</option>
+                                    <option value="serviceZ">Service Z</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label for="caseDescription">Description</label>
+                                <textarea name="caseDescription" id="caseDescription" rows="6" th:field="*{description}"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <ul class="actions">
+                                    <li>
+                                        <button  class="button primary" type="submit">Submit</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </section>
+    <div th:replace="fragments/footerFragment :: footer"></div>
+</div>
+</body>
+</html>

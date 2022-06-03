@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Bad request</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="http://localhost:8080/assets/css/main.css"  />
+    <noscript><link rel="stylesheet" href="http://localhost:8080/assets/css/noscript.css" /></noscript>
+</head>
+<body class="is-preload">
+    <div id="page-wrapper">
+
+        <!-- Header -->
+        <header id="header">
+            <h1><a href="/welcome">XCentrica</a></h1>
+            <nav>
+                <a href="#menu">Menu</a>
+            </nav>
+        </header>
+
+        <!-- Menu -->
+        <nav id="menu">
+            <div class="inner">
+                <h2>Menu</h2>
+                <ul class="links">
+                    <li><a href="/welcome">Home</a></li>
+                    <li><a href="/contact/form">Contact</a></li>
+                </ul>
+                <a href="#" class="close">Close</a>
+            </div>
+        </nav>
+        <!-- Post -->
+
+        <section id="wrapper">
+            <header>
+                <div class="inner">
+                    <h2>Oops!</h2>
+                    <p>We didn't find what you were looking for (^=˃ᆺ˂)> </p>
+                    <p th:if="${exception != null}" th:text="${exception.getMessage()}"></p>
+                </div>
+            </header>
+        </section>
+
+    <div th:replace="fragments/footerFragment :: footer"></div>
+</div>
+
+</body>
+</html>

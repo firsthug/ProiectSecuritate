@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>SignUp</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="http://localhost:8080/assets/css/main.css"  />
+    <noscript><link rel="stylesheet" href="http://localhost:8080/assets/css/noscript.css" /></noscript>
+</head>
+<body class="is-preload">
+
+<!-- Page Wrapper -->
+<div id="page-wrapper">
+
+    <!-- Header -->
+    <header id="header">
+        <h1><a href="/welcome">XCentrica</a></h1>
+        <nav>
+            <a href="#menu">Menu</a>
+        </nav>
+    </header>
+
+    <!-- Menu -->
+    <nav id="menu">
+        <div class="inner">
+            <h2>Menu</h2>
+            <ul class="links">
+                <li><a href="/welcome">Home</a></li>
+                <li><a href="/contact/form">Contact</a></li>
+                <li><a href="/login">Log In</a></li>
+            </ul>
+            <a href="#" class="close">Close</a>
+        </div>
+    </nav>
+
+    <!-- Wrapper -->
+    <section id="wrapper">
+        <header>
+            <div class="inner">
+                <h2>Client Sign Up</h2>
+            </div>
+        </header>
+
+
+        <!-- Content -->
+        <div class="wrapper">
+            <div class="inner">
+                <section>
+                    <form th:object="${aopUser}" th:action="@{/signUp}" method="post" >
+                        <input type="hidden" th:field="*{userID}"/>
+                        <div class="row gtr-uniform">
+                            <div class="col-12">
+                                <label>Full name:</label>
+                                <input type="text" class="form-control" th:field="*{fullname}"/>
+                                <p th:if="${#fields.hasErrors('fullname')}" th:errors="*{fullname}">Full Name error</p>
+                            </div>
+
+                            <div class="col-6 col-12-xsmall">
+                                <label>Phone:</label>
+                                <input type="text" class="form-control" th:field="*{phone}"/>
+                                <p th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Phone format error</p>
+                            </div>
+
+                            <div class="col-6 col-12-xsmall">
+                                <label>Email:</label>
+                                <input type="text" class="form-control" th:field="*{email}"/>
+                                <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</p>
+                            </div>
+
+                            <div class="col-12">
+                                <label>Password:</label>
+                                <input type="password" class="form-control" th:field="*{password}"/>
+                                <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</p>
+                            </div>
+                            <div class="col-12">
+                                <ul class="actions">
+                                    <li>
+                                        <button  class="button primary" type="submit">Sign up</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </section>
+    <div th:replace="fragments/footerFragment :: footer"></div>
+</div>
+</body>
+</html>
