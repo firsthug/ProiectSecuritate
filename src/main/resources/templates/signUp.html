@@ -46,7 +46,7 @@
         <div class="wrapper">
             <div class="inner">
                 <section>
-                    <form th:object="${aopUser}" th:action="@{/signUp}" method="post" >
+                    <form th:object="${aopUser}" th:action="@{/signUp/agent}" method="post" >
                         <input type="hidden" th:field="*{userID}"/>
                         <div class="row gtr-uniform">
                             <div class="col-12">

@@ -18,8 +18,8 @@ public class APIService {
     public static final String POST_CASE_API = "https://aopmada.atlassian.net/rest/api/3/issue";
     public static final String SEARCH_CASES_API = "https://aopmada.atlassian.net/rest/api/3/search";
     public static final String CASE_COMMENTS_API = "https://aopmada.atlassian.net/rest/api/3/issue/{issueKey}/comment";
-    public static final String USER = "ancuta.vaduva1002@gmail.com";
-    public static final String PASSWORD = "OV3hsSGLlWHnjhhDmDqm6043";
+    public static final String USER = "first000hug@gmail.com";
+    public static final String PASSWORD = "Xdoa8b9c0HE8BPIjEHNeB7A9";
 
 
     public String sendCaseToJira(AOPCase aopCase) throws Exception {

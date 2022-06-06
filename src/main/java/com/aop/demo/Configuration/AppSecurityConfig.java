@@ -41,8 +41,8 @@ public class AppSecurityConfig  extends WebSecurityConfigurerAdapter {
 //                .roles("ADMIN");
         auth.jdbcAuthentication().dataSource(dataSource)
                 .passwordEncoder(passwordEncoder())
-                .usersByUsernameQuery("SELECT username ,password, 1 as enabled FROM AOPUser where username=?")
-                .authoritiesByUsernameQuery("SELECT username ,'USER'  from AOPUser where username=?");
+                .usersByUsernameQuery("SELECT username ,password, 1 as enabled FROM ADMIN1.AOPUser where username=?")
+                .authoritiesByUsernameQuery("SELECT username ,'USER'  from ADMIN1.AOPUser where username=?");
     }
 
     protected void configure(HttpSecurity http) throws Exception {

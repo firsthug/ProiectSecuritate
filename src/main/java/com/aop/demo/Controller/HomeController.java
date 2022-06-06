@@ -2,6 +2,8 @@ package com.aop.demo.Controller;
 
 
 import com.aop.demo.Exception.NotFoundException;
+import com.aop.demo.Model.AOPAgent;
+import com.aop.demo.Model.AOPConsumer;
 import com.aop.demo.Model.AOPUser;
 import com.aop.demo.Service.AOPUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 
 @Controller
 public class HomeController {
@@ -31,24 +34,49 @@ public class HomeController {
         return "welcome";
     }
 
-    @GetMapping({"/signUp", "/signup"})
-    public String newCustomer(Model model) {
-        model.addAttribute("aopUser", new AOPUser());
+// SCHIMBA POST_UL DIN FORMULAR
+    @GetMapping({"/signUp/agent"})
+    public String newAgent(Model model) {
+        model.addAttribute("aopUser", new AOPAgent());
+        //agentmada@securitate.com
+        //1234
         return "signUp";
     }
 
-    @PostMapping({"/signUp", "/signup"})
-    public String saveOrUpdate(@Valid AOPUser aopUser, BindingResult bindingResult) {
+    @PostMapping({"/signUp/agent"})
+    public String saveOrUpdateAgent(@Valid AOPAgent aopUser, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "signUp";
         }
 
         aopUser.setPassword(passwordEncoder.encode(aopUser.getPassword()));
         aopUser.setUsername(aopUser.getEmail());
-        aopUserService.save(aopUser);
-        return "login";
+        aopUser.setHireDate(LocalDateTime.now());
+        aopUser.setType("agent");
+        aopUserService.saveAgent(aopUser);
+        return "redirect:/login";
     }
 
+    @GetMapping({"/signUp/consumer"})
+    public String newClient(Model model) {
+        model.addAttribute("aopUser", new AOPConsumer());
+        //mada@securitate.com
+        //1234
+        return "signUp";
+    }
+
+    @PostMapping({"/signUp/consumer"})
+    public String saveOrUpdateConsumer(@Valid AOPConsumer aopUser, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "signUp";
+        }
+
+        aopUser.setPassword(passwordEncoder.encode(aopUser.getPassword()));
+        aopUser.setUsername(aopUser.getEmail());
+        aopUser.setCNP("2991107394860");
+        aopUserService.saveConsumer(aopUser);
+        return "redirect:login";
+    }
 
     @GetMapping("/login")
     public String getUserLoginPage() {
@@ -81,6 +109,24 @@ public class HomeController {
 //    public String unmatchedRequests()
 //    {
 //        throw new NotFoundException("Nothing here!");
+//    }
+
+    //    @GetMapping({"/signUp", "/signup"})
+//    public String newCustomer(Model model) {
+//        model.addAttribute("aopUser", new AOPUser());
+//        return "signUp";
+//    }
+//
+//    @PostMapping({"/signUp", "/signup"})
+//    public String saveOrUpdate(@Valid AOPUser aopUser, BindingResult bindingResult) {
+//        if (bindingResult.hasErrors()) {
+//            return "signUp";
+//        }
+//
+//        aopUser.setPassword(passwordEncoder.encode(aopUser.getPassword()));
+//        aopUser.setUsername(aopUser.getEmail());
+//        aopUserService.save(aopUser);
+//        return "login";
 //    }
 
 }

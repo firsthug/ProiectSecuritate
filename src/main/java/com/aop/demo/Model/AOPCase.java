@@ -6,11 +6,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
+@Table(schema="ADMIN1")
 public class AOPCase {
 
     @Id
     @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="SEQUENCE1")
-    @SequenceGenerator(name="SEQUENCE1", sequenceName="SEQUENCE1", allocationSize=1)
+    @SequenceGenerator(name="SEQUENCE1", sequenceName="ADMIN1.SEQUENCE1", allocationSize=1)
     private Integer caseID;
 
     private String subject;

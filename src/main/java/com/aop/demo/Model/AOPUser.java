@@ -4,15 +4,19 @@ package com.aop.demo.Model;
 import javax.persistence.*;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name="type",discriminatorType = DiscriminatorType.STRING)
+@Table(schema = "ADMIN1")
 public class AOPUser {
 
     @Id
     @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="SEQUENCE1")
-    @SequenceGenerator(name="SEQUENCE1", sequenceName="SEQUENCE1", allocationSize=1)
+    @SequenceGenerator(name="SEQUENCE1", sequenceName="ADMIN1.SEQUENCE1", allocationSize=1)
     private Integer userID;
 
     private String fullname;
 
+    @Column(name="USERNAME")
     private String username;
 
     private String password;
@@ -20,6 +24,17 @@ public class AOPUser {
     private String email;
 
     private String phone;
+
+    @Column(insertable = false, updatable = false)
+    private String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public Integer getUserID() {
         return userID;
@@ -69,12 +84,14 @@ public class AOPUser {
         this.phone = phone;
     }
 
-    public AOPUser(Integer userID, String fullname, String password, String email, String phone) {
+    public AOPUser(Integer userID, String fullname, String username, String password, String email, String phone, String type) {
         this.userID = userID;
         this.fullname = fullname;
+        this.username = username;
         this.password = password;
         this.email = email;
         this.phone = phone;
+        this.type = type;
     }
 
     public AOPUser(Integer userID) {

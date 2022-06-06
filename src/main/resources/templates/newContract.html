@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+
+    <title>Customer Contact</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css"  th:href="@{/assets/css/main.css}" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css"  th:href="@{/assets/css/noscript.css}"  /></noscript>
+</head>
+
+<body class="is-preload">
+
+<div id="page-wrapper">
+
+    <!-- Header -->
+    <header id="header">
+        <h1><a href="/welcome">XCentrica</a></h1>
+        <nav>
+            <a href="#menu">Menu</a>
+        </nav>
+    </header>
+
+    <!-- Menu -->
+    <nav id="menu">
+        <div class="inner">
+            <h2>Menu</h2>
+            <ul class="links">
+                <li><a href="/welcome">Home</a></li>
+                <li><a href="/contact/myCases">My Cases</a></li>
+            </ul>
+            <a href="#" class="close">Close</a>
+        </div>
+    </nav>
+
+    <!-- Banner -->
+    <section id="banner">
+        <div class="inner">
+            <div class="logo"><span class="icon solid fa-home"></span></div>
+            <h2>Create a new contract</h2>
+        </div>
+    </section>
+
+    <!-- Wrapper -->
+    <section id="wrapper">
+        <!-- Content -->
+        <div class="wrapper">
+            <div class="inner">
+                <section>
+                    <form th:object="${aopContractDTO}" th:action="@{/contract/new}" method="post">
+<!--                        <input type="hidden" th:field="*{}" />-->
+                        <div class="row gtr-uniform">
+                            <div class="col-6">
+                                    <label>Customer</label>
+                                    <select class="form-control" id="Customer" name="Customer" th:field="*{aopContract.userID.userID}" >
+                                        <option
+                                                th:each="thisConsumer : ${consumers}"
+                                                th:value="${thisConsumer.userID}" th:text="${thisConsumer.getFullname()}">
+                                        </option>
+                                    </select>
+
+                            </div>
+                            <div class="col-6">
+                                <label>Service</label>
+                                <select class="form-control" id="contractCategory" name="contractCategory" th:field="*{aopContract.category}" >
+                                    <option value="serviceX">Service X</option>
+                                    <option value="serviceY">Service Y</option>
+                                    <option value="serviceZ">Service Z</option>
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <label>Start Date</label>
+                                <input type="datetime-local" class="form-control" th:field="*{aopContract.startDate}"/>
+                            </div>
+                            <div class="col-6">
+                                <label>End Date</label>
+                                <input type="datetime-local" class="form-control" th:field="*{aopContract.endDate}"/>
+                            </div>
+                            <div class="col-12">
+                                <label for="contractCP">Consumption Point Address</label>
+                                <textarea name="contractCP" id="contractCP" rows="6" th:field="*{aopConsumptionPoint.address}"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <ul class="actions">
+                                    <li>
+                                        <button  class="button primary" type="submit">Submit</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </section>
+    <div th:replace="fragments/footerFragment :: footer"></div>
+</div>
+</body>
+</html>

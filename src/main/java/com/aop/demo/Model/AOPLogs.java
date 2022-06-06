@@ -4,11 +4,12 @@ package com.aop.demo.Model;
 import javax.persistence.*;
 
 @Entity
+@Table(schema="ADMIN1")
 public class AOPLogs {
 
     @Id
     @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="SEQUENCE1")
-    @SequenceGenerator(name="SEQUENCE1", sequenceName="SEQUENCE1", allocationSize=1)
+    @SequenceGenerator(name="SEQUENCE1", sequenceName="ADMIN1.SEQUENCE1", allocationSize=1)
     private Integer logID;
 
     private String stacktrace;

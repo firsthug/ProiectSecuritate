@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+
+    <title>Customer Contact</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css"  th:href="@{/assets/css/main.css}" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css"  th:href="@{/assets/css/noscript.css}"  /></noscript>
+</head>
+
+<body class="is-preload">
+
+<div id="page-wrapper">
+
+    <!-- Header -->
+    <header id="header">
+        <h1><a href="/welcome">XCentrica</a></h1>
+        <nav>
+            <a href="#menu">Menu</a>
+        </nav>
+    </header>
+
+    <!-- Menu -->
+    <nav id="menu">
+        <div class="inner">
+            <h2>Menu</h2>
+            <ul class="links">
+                <li><a href="/welcome">Home</a></li>
+                <li><a href="/contact/form">Contact</a></li>
+                <li><a href="/contact/myCases">My Cases</a></li>
+            </ul>
+            <a href="#" class="close">Close</a>
+        </div>
+    </nav>
+
+    <!-- Banner -->
+    <section id="banner">
+        <div class="inner">
+            <div class="logo"><span class="icon solid fa-home"></span></div>
+            <h2>My Contracts</h2>
+        </div>
+    </section>
+
+    <!-- Wrapper -->
+    <section id="wrapper">
+        <!-- Content -->
+        <div class="wrapper">
+            <div class="inner">
+                <section>
+                    <div class="table-wrapper">
+                        <table class="alt">
+                            <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Status</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>For Consumption Point</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="contract : ${userContracts}">
+                                <td th:text=" ${contract.getCategory()}"></td>
+                                <td th:text=" ${contract.getStatus()}"></td>
+                                <td th:text=" ${contract.getStartDate()}"></td>
+                                <td th:text=" ${contract.getEndDate()}"></td>
+                                <td th:text=" ${contract.getConsumptionPoint().getAddress()}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+    <div th:replace="fragments/footerFragment :: footer"></div>
+</div>
+</body>
+</html>
